@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  test_package:
+      docker:
+        - image: circleci/python:3.9.3
+      environment: 
+        PYTHONPATH: /home/circleci/project/src
+      steps:
+        - checkout
+        - run: 
+            name: Install pytest
+            command: sudo pip install pytest
+        - run: 
+            name: Test python scripts
+            command: python -m pytest -v
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test_package
